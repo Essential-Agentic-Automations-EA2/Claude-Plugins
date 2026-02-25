@@ -1,0 +1,9 @@
+{
+  "name": "finops-basic",
+  "version": "1.0.0",
+  "description": "Financial services assistant for everyday knowledge workers. Helps with client summaries, meeting prep, and report drafting.",
+  "author": {
+    "name": "EDA Repository"
+  },
+  "keywords": ["financial-services", "compliance", "finops", "reporting"]
+}
