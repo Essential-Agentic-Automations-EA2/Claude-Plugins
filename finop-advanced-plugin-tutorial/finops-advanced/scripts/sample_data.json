@@ -1,0 +1,35 @@
+{
+  "REPORT_DATE": "4 March 2026",
+  "REPORT_PERIOD": "Q4 2025",
+  "ADVISER_NAME": "Sarah Chen",
+  "ADVISER_TITLE": "Senior Financial Adviser",
+  "FIRM_NAME": "Meridian Wealth Partners",
+  "FIRM_AFSL": "AFSL 123456",
+
+  "CLIENT_NAME": "James and Helen Nguyen",
+  "CLIENT_REFERENCE": "NGC-2025-0041",
+  "CLIENT_RISK_PROFILE": "Balanced",
+  "CLIENT_TIME_HORIZON": "12 years",
+
+  "PORTFOLIO_TOTAL_VALUE": "$842,300",
+  "PORTFOLIO_RETURN_PERIOD": "4.7%",
+  "PORTFOLIO_RETURN_INCEPTION": "6.2% p.a.",
+  "PORTFOLIO_BENCHMARK": "60/40 Balanced Index",
+  "PORTFOLIO_BENCHMARK_RETURN": "4.1%",
+
+  "ALLOCATION_AU_EQUITIES": "28%",
+  "ALLOCATION_INTL_EQUITIES": "22%",
+  "ALLOCATION_FIXED_INCOME": "30%",
+  "ALLOCATION_PROPERTY": "10%",
+  "ALLOCATION_CASH": "7%",
+  "ALLOCATION_ALTERNATIVES": "3%",
+
+  "RBA_CASH_RATE": "4.10%",
+  "ASX200_LEVEL": "8,142",
+  "CPI_ANNUAL": "3.4%",
+
+  "NEXT_REVIEW_DATE": "September 2026",
+  "MEETING_DATE": "3 March 2026",
+
+  "DISCLAIMER": "Past performance is not a reliable indicator of future performance. This report contains general information only and does not constitute personal financial advice. Please refer to your current Statement of Advice."
+}

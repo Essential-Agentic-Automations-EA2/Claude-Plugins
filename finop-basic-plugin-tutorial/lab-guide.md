@@ -155,6 +155,10 @@ Open the `level1-finops-basic` folder and read each file:
 **All platforms — Option B: Test via Claude Code (recommended for building)**
 ```bash
 claude --plugin-dir ~/plugin-level1/finops-basic
+
+# for example 
+
+claude --plugin-dir /media/daghan/DATA/Daghan/git/Claude-Plugin/finop-basic-plugin-tutorial/finops-basic
 ```
 > **Linux users:** this is your only option — use Claude Code.
 

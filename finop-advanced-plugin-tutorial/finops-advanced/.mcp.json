@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${TAVILY_API_KEY}"
+      },
+      "description": "Live ASX prices, RBA cash rate, ASIC regulatory updates, fund performance data"
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Persist client risk profiles, investment goals, and meeting history across sessions"
+    }
+  }
+}

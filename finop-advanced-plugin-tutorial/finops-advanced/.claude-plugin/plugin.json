@@ -1,0 +1,9 @@
+{
+  "name": "finops-advanced",
+  "version": "2.0.0",
+  "description": "Advanced wealth management assistant for Australian financial advisers. Integrates live market data, client document reading, and persistent client memory for portfolio reviews, retirement projections, and compliant client communications.",
+  "author": {
+    "name": "EDA Repository"
+  },
+  "keywords": ["financial-services", "wealth-management", "compliance", "finops", "portfolio", "market-data", "mcp"]
+}
