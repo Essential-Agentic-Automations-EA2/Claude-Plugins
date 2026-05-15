@@ -30,6 +30,7 @@ Key Differences: Level 1 vs Level 2
 |---|---|
 | Claude Code CLI | `claude --version` should work |
 | A free Tavily API key | https://app.tavily.com/ — takes ~2 minutes |
+| Install node | https://nodejs.org/en/download check your OS specific instructions |
 | Some sample client documents | PDFs, CSVs, or text files — can be dummy data |
 
 ---
@@ -52,7 +53,7 @@ export TAVILY_API_KEY=your_key_here   # add to ~/.zshrc or ~/.bashrc for persist
 claude --plugin-dir /path/to/level2/plugin-level2/finops-advanced
 
 # for example
-claude --plugin-dir /media/daghan/DATA/Daghan/git/EDA-repository/agent-experiments/claudeplugin/level2/plugin-level2/finops-advanced
+claude --plugin-dir 'finop-advanced-plugin-tutorial/finops-advanced/'
 ```
 
 ```powershell
@@ -163,7 +164,7 @@ On a new claude
 claude --plugin-dir /path/to/level2/plugin-level2/finops-advanced
 
 # for example
-claude --plugin-dir /media/daghan/DATA/Daghan/git/EDA-repository/agent-experiments/claudeplugin/level2/plugin-level2/finops-advanced
+claude --plugin-dir 'finop-advanced-plugin-tutorial/finops-advanced/'
 ```
 
 write the following  
@@ -240,7 +241,7 @@ The `generate-report` command produces a filled Word (`.docx`) document from a t
 
 ### Usage
 
-!Copy NGC-2025-0041_Q4-2025_quarterly-review.docx to ~/Documents/clients/templates
+Word document template can be found at NGC-2025-0041_Q4-2025_quarterly-review.docx to ~/Documents/clients/templates
 
 **Quick mode** — skip data collection, use a pre-built JSON file:
 ```
@@ -282,7 +283,98 @@ The script names output files as: `[CLIENT_REF]_[PERIOD]_[TYPE].docx`
 
 ---
 
-## Part 6 — Troubleshooting
+## Part 6 — Publishing Your Plugin to the Marketplace
+
+Once your plugin is working locally you can share it with your team or publish it publicly so anyone can install it with a single `--plugin-dir` flag pointing at your repository.
+
+The `plugin-dev` developer plugin provides three tools that validate and package your plugin before you share it.
+
+### Step 1 — Validate the plugin structure
+
+Run the plugin validator to confirm `plugin.json` is correct and all referenced files exist:
+
+```
+/plugin-dev:plugin-validator
+```
+
+The validator checks:
+- `plugin.json` metadata (name, version, description, author)
+- All commands, agents, and skills referenced in the manifest are present on disk
+- MCP server entries in `.mcp.json` are syntactically valid
+- No broken file paths or missing required fields
+
+Fix any reported issues before proceeding.
+
+### Step 2 — Review skill quality
+
+Run the skill reviewer across your custom skills to ensure trigger descriptions are clear enough for Claude to auto-activate them reliably:
+
+```
+/plugin-dev:skill-reviewer
+```
+
+The reviewer checks each skill's frontmatter trigger language and body structure, and suggests improvements. Well-written trigger descriptions are the difference between a skill that fires automatically and one that requires explicit invocation every time.
+
+### Step 3 — Confirm plugin.json is marketplace-ready
+
+Open `.claude-plugin/plugin.json` and verify the following fields are complete:
+
+```json
+{
+  "name": "finops-advanced",
+  "version": "2.0.0",
+  "description": "Advanced wealth management plugin with live market data, client memory, and compliant reporting for financial advisers.",
+  "author": "Your Name or Org",
+  "claude_code_version": ">=1.0.0",
+  "mcp_servers": ["tavily", "memory"]
+}
+```
+
+A clear `description` is what users see when browsing the marketplace — make it specific to the use case.
+
+### Step 4 — Push to GitHub
+
+```bash
+cd /path/to/finops-advanced
+git init
+git add .
+git commit -m "Initial release: finops-advanced plugin v2.0"
+gh repo create finops-advanced-plugin --public --source=. --push
+```
+
+The plugin does **not** need to be at the root of the repository. If it lives in a subfolder (e.g. `finop-advanced-plugin-tutorial/finops-advanced/`), users just point `--plugin-dir` at that subfolder after cloning.
+
+### Step 5 — Share the install instructions
+
+Provide users with two commands: clone and launch.
+
+```bash
+# Clone the repo
+git clone https://github.com/YourUsername/finops-advanced-plugin.git
+
+# Launch Claude Code with the plugin
+claude --plugin-dir finops-advanced-plugin/finop-advanced-plugin-tutorial/finops-advanced/
+```
+
+> **Note:** MCP servers (tavily, memory) must be registered separately on each machine — they are not auto-installed from the plugin directory. Include MCP setup instructions in your repository README so users know to run `claude mcp add` before their first session.
+
+### What the `plugin-dev` plugin can build for you
+
+If you want to extend this plugin or create a new one from scratch, the `plugin-dev` plugin provides an end-to-end guided workflow:
+
+| Command | What it does |
+|---|---|
+| `/plugin-dev:create-plugin` | Guided creation of a new plugin with all components |
+| `/plugin-dev:plugin-validator` | Validates structure and manifest |
+| `/plugin-dev:skill-reviewer` | Reviews trigger language and skill body quality |
+| `/plugin-dev:agent-creator` | Generates a new agent configuration |
+| `/plugin-dev:plugin-structure` | Explains plugin layout and `plugin.json` conventions |
+
+Run `/plugin-dev:create-plugin` to scaffold a new plugin interactively — it walks you through naming, component design, and file generation in one session.
+
+---
+
+## Part 7 — Troubleshooting
 
 ### "MCP server not found" errors
 ```bash
@@ -315,5 +407,6 @@ In Level 2 you have:
 3. **Read client documents from disk** using Claude Code's native file tools — no extra MCP needed
 4. **Created persistent client memory** that survives across Claude Code sessions
 5. **Built compliant, data-grounded commands** for portfolio review, retirement modelling, and market briefings
+6. **Validated and published the plugin** to a GitHub-hosted marketplace using the `plugin-dev` developer plugin
 
 The key insight: **only add an MCP server when Claude doesn't already have the capability**. File access, bash execution, and code editing are built into Claude Code — MCP adds things Claude can't do natively, like live web search (Tavily), persistent cross-session memory, and Gmail.

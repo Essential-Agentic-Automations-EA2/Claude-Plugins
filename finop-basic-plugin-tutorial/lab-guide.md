@@ -3,7 +3,6 @@
 
 *Building a Financial Services Plugin with Natural Language*
 
-**Time estimate:** 60–90 minutes  
 **Audience:** Business analysts, financial advisers, operations staff, anyone who uses Claude daily  
 **Goal:** Build and test a working plugin using only Markdown and a text editor  
 **Next:** When you're done here, continue with the Level 2 guide to add MCP tools and sub-agent orchestration.
@@ -149,16 +148,12 @@ Open the `level1-finops-basic` folder and read each file:
 
 **macOS / Windows — Option A: Test via Cowork**
 1. Open Claude Desktop → Cowork tab → Plugins → Upload Plugin
-2. Select the `level1-finops-basic` folder (or zip it first)
+2. Select the `finops-basic` folder (or zip it first)
 3. Once installed, start a Cowork session
 
 **All platforms — Option B: Test via Claude Code (recommended for building)**
 ```bash
-claude --plugin-dir ~/plugin-level1/finops-basic
-
-# for example 
-
-claude --plugin-dir /media/daghan/DATA/Daghan/git/Claude-Plugin/finop-basic-plugin-tutorial/finops-basic
+claude --plugin-dir finop-basic-plugin-tutorial/level1-plugin/finops-basic
 ```
 > **Linux users:** this is your only option — use Claude Code.
 
@@ -167,7 +162,7 @@ Once the plugin is loaded, try these prompts:
 **Test 1 — Does the compliance skill fire automatically?**
 ```
 Write a short email to a client telling them their portfolio returned 12% last year
-and will definitely return 15% next year.
+and will definitely return 15% next year. You can use the file files/basic-tutorial/client-portfolio-email.txt
 ```
 👀 Watch what Claude does. Does it correct the "definitely" language?
 
@@ -309,7 +304,7 @@ After making your changes, reload the plugin:
 **Via Claude Code (all platforms including Linux):**
 ```bash
 # Exit current session and relaunch
-claude --plugin-dir ~/plugin-level1/finops-basic
+claude --plugin-dir finop-basic-plugin-tutorial/level1-plugin/finops-basic
 ```
 
 **Via Cowork (macOS / Windows):**  
@@ -356,7 +351,7 @@ Ensure the `level1-finops-basic` plugin is installed in Cowork, start a session,
 
 **All platforms — via Claude Code:**
 ```bash
-claude --plugin-dir ./plugin-files/level1-finops-basic
+claude --plugin-dir finop-basic-plugin-tutorial/level1-plugin/finops-basic
 ```
 > **Linux users:** use Claude Code as above.
 
