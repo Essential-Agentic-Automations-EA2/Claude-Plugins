@@ -160,9 +160,12 @@ claude --plugin-dir finop-basic-plugin-tutorial/level1-plugin/finops-basic
 Once the plugin is loaded, try these prompts:
 
 **Test 1 — Does the compliance skill fire automatically?**
+
+In claude write the following
+
 ```
 Write a short email to a client telling them their portfolio returned 12% last year
-and will definitely return 15% next year. You can use the file files/basic-tutorial/client-portfolio-email.txt
+and will definitely return 15% next year. 
 ```
 👀 Watch what Claude does. Does it correct the "definitely" language?
 
@@ -264,6 +267,7 @@ claude
 Then paste this prompt, filling in your specifics:
 
 ```
+/skill-development
 I'm building a Claude Code plugin for a financial services firm.
 I need a new skill file at:
   skills/email-tone/SKILL.md
